@@ -997,7 +997,7 @@ public static class iTweenExtensions
 	public static void RotateBy(this GameObject go,Vector3 amount,float time,float delay,EaseType easeType){
 		iTween.RotateBy(go,iTween.Hash("amount",amount,"time",time,"delay",delay,"easeType",easeType.ToString()));
 	}
-	
+
 	/// <summary>
 	/// Multiplies supplied values by 360 and rotates a GameObject by calculated amount over time.
 	/// </summary>
@@ -1018,6 +1018,31 @@ public static class iTweenExtensions
 	/// </param>
 	public static void RotateBy(this GameObject go,Vector3 amount,float time,float delay,EaseType easeType,LoopType loopType){
 		iTween.RotateBy(go,iTween.Hash("amount",amount,"time",time,"delay",delay,"easeType",easeType.ToString(),"looptype",loopType.ToString()));
+	}
+	
+	/// <summary>
+	/// Multiplies supplied values by 360 and rotates a GameObject by calculated amount over time.
+	/// </summary>
+	/// <param name="amount">
+	/// A <see cref="Vector3"/>
+	/// </param>
+	/// <param name="time">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	/// <param name="delay">
+	/// A <see cref="System.Single"/>
+	/// </param>
+	/// <param name="easetype">
+	/// A <see cref="EaseType"/>
+	/// </param>
+	/// <param name="looptype">
+	/// A <see cref="LoopType"/>
+	/// </param>
+	/// <param name="name">
+	/// A <see cref="Name"/>
+	/// </param>
+	public static void RotateBy(this GameObject go,Vector3 amount,float time,float delay,EaseType easeType,LoopType loopType, string name){
+		iTween.RotateBy(go,iTween.Hash("amount",amount,"time",time,"delay",delay,"easeType",easeType.ToString(),"looptype",loopType.ToString(), "name",name));
 	}
 	
 	/// <summary>

@@ -7,14 +7,11 @@ public class DebugManager : MonoBehaviour
     public static DebugManager instance;
 
 	//Debug;
-	public Spining spiningPerformer; 
+	public Spinning spiningPerformer; 
 
     void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
+        instance = this;
     }
 
     // Use this for initialization
