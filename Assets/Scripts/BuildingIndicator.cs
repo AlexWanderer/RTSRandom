@@ -55,7 +55,7 @@ public class BuildingIndicator : MonoBehaviour
             transform.Rotate(new Vector3(0f, 90f, 0f));
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (_myBuildingIcon != null)
             {
@@ -63,6 +63,7 @@ public class BuildingIndicator : MonoBehaviour
                 GameObject newGo = Utils.CreateAndParent(_myBuildingIcon, PrefabManager.instance.buildingPrefabs[_myBuildingIconIndex]);
                 newGo.transform.parent = _world;
 				//TODO: set state;
+				newGo.GetComponent<PlayMakerFSM>().SendEvent("Build");
             }
             
         }
