@@ -11,7 +11,12 @@ public class PrefabManager : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        if (instance == null) {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        } else if (instance != this) {
+            Destroy(gameObject);
+        }
     }
 
     // Use this for initialization

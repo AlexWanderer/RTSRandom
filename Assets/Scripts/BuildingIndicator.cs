@@ -65,7 +65,7 @@ public class BuildingIndicator : MonoBehaviour
 				//TODO: set state;
 				newGo.GetComponent<PlayMakerFSM>().SendEvent("Build");
             }
-            
+
         }
 
     }
