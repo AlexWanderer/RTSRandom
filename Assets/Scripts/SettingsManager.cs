@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -7,9 +6,6 @@ public class SettingsManager : MonoBehaviour
 
     // local scale size
     public float GridSize = 2f; 
-    
-
-
     void Awake()
     {
         if (instance == null) {
@@ -31,6 +27,6 @@ public class SettingsManager : MonoBehaviour
     void Update()
     {
         
-
     }
+
 }

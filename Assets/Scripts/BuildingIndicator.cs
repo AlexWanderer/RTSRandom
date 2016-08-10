@@ -6,6 +6,8 @@ public class BuildingIndicator : MonoBehaviour
 
     int _myBuildingIconIndex = -1;
 
+    public bool canBuild = true;
+
     Transform _world;
     public int myBuildingIconIndex
     {
@@ -20,6 +22,7 @@ public class BuildingIndicator : MonoBehaviour
                 Destroy(_myBuildingIcon.gameObject);
             }
             _myBuildingIcon = Utils.CreateAndParent(gameObject, PrefabManager.instance.buildingPrefabs[value]);
+            _myBuildingIcon.GetComponent<IndicatorCollidingMaterialModifier>().myBuildingIndicator = this;
         }
     }
 
@@ -50,6 +53,7 @@ public class BuildingIndicator : MonoBehaviour
             //Debug.Log("HitPosition -> " + targetPosition);
             transform.position = targetPosition;
         }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             transform.Rotate(new Vector3(0f, 90f, 0f));
@@ -59,14 +63,29 @@ public class BuildingIndicator : MonoBehaviour
         {
             if (_myBuildingIcon != null)
             {
-				//TODO: judge colliding;
-                GameObject newGo = Utils.CreateAndParent(_myBuildingIcon, PrefabManager.instance.buildingPrefabs[_myBuildingIconIndex]);
-                newGo.transform.parent = _world;
-				//TODO: set state;
-				newGo.GetComponent<PlayMakerFSM>().SendEvent("Build");
+                if (!canBuild)
+                    return;
+                Invoke("Build", 0.2f);
             }
-
         }
+    }
+
+    void Build()
+    {
+        // ifonly canBuild in this whole 0.2secs we can build
+        if (!canBuild)
+            return;
+        
+        GameObject newGo = Utils.CreateAndParent(_myBuildingIcon, PrefabManager.instance.buildingPrefabs[_myBuildingIconIndex]);
+        newGo.transform.parent = _world;
+
+        newGo.GetComponent<PlayMakerFSM>().SendEvent("Build");
+        Collider newGoCollider = newGo.GetComponent<Collider>();
+        newGoCollider.enabled = true;
+        newGoCollider.isTrigger = false;
+        Rigidbody rb = newGo.AddMissingComponent<Rigidbody>();
+        rb.isKinematic = true;
+        rb.detectCollisions = true;
 
     }
 }
